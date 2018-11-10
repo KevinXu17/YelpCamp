@@ -4,15 +4,10 @@
     app.set("view engine", "ejs");
     var mongoose = require("mongoose");
     mongoose.connect("mongodb://localhost/yelpcamp_app");
-    
-    // SCHEMA SETUP
-    var campgroundSchema = new mongoose.Schema({
-        name: String,
-        image: String,
-        description: String
-    });
-    
-    var Campground = mongoose.model("Campground", campgroundSchema);
+    var Campground = require("./models/campground");
+    var Comment = require("./models/commment");
+    var User = require("./models/user");
+
 
 
  
