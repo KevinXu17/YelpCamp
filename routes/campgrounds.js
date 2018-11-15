@@ -29,12 +29,14 @@
         //res.send("!!!!!");
         var name = req.body.name;
         var image = req.body.image;
+        var price = req.body.price;
         var description = req.body.description;
         var author = {
             id: req.user._id,
             username: req.user.username
         }
         var newCampGround = {name: name,
+                             price: price,
                              image: image,
                              description: description,
                              author: author
