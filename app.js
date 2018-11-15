@@ -8,10 +8,13 @@
     var seedDB        = require("./seeds")
     var passport      = require("passport")
     var LocalStrategy = require("passport-local")
+    var flash         = require("connect-flash")
     
     var commentRoutes = require("./routes/comments")
     var campgroudRoutes= require("./routes/campgrounds")
     var indexRoutes    = require("./routes/index")
+    
+    var methodOverride = require("method-override")
     
     
     app.use(bodyParser.urlencoded({extended: true}));
@@ -19,8 +22,9 @@
     mongoose.connect("mongodb://localhost/yelpcamp_app_3");
     
     app.use(express.static(__dirname + "/public"))
-
-    seedDB();
+    app.use(methodOverride("_method"))
+    app.use(flash())
+   // seedDB();
     
     // PASSPORT CONFIGURATION
     app.use(require("express-session")({
@@ -37,6 +41,8 @@
    // this must after all of above        
     app.use(function(req, res, next){   // add currentuser to all rout
         res.locals.currentUser = req.user;
+        res.locals.error = req.flash("error")
+        res.locals.success = req.flash("success") 
         next();
     })
    

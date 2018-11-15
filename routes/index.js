@@ -16,10 +16,12 @@
         var newUser = new User({username: req.body.username})
         User.register(newUser, req.body.password, function(err, user){
             if (err) {
+                req.flash("error", err.message)   // <-----err check by passport
                 console.log(err)
                 return res.render("register")
             }
             passport.authenticate("local")(req, res, function(){
+                req.flash("success", "Welcome to YelpCamp " + user.username)
                 res.redirect("/campgrounds")
             })
         })
@@ -40,6 +42,7 @@
     // LOGOUT
     router.get("/logout", function(req, res) {
         req.logout();
+        req.flash("success", "Logged out!")
         res.redirect("/campgrounds")
     })
     
