@@ -10,16 +10,18 @@
     var LocalStrategy = require("passport-local")
     var flash         = require("connect-flash")
     
-    var commentRoutes = require("./routes/comments")
-    var campgroudRoutes= require("./routes/campgrounds")
-    var indexRoutes    = require("./routes/index")
+    var commentRoutes   = require("./routes/comments")
+    var campgroudRoutes = require("./routes/campgrounds")
+    var indexRoutes     = require("./routes/index")
     
     var methodOverride = require("method-override")
     
     
     app.use(bodyParser.urlencoded({extended: true}));
     app.set("view engine", "ejs");
-    mongoose.connect("mongodb://localhost/yelpcamp_app_3");
+    
+    mongoose.connect(process.env.DATABASEURL);
+   
     
     app.use(express.static(__dirname + "/public"))
     app.use(methodOverride("_method"))
