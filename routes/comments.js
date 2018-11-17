@@ -37,6 +37,7 @@
                         newComment.save();
                         foundCampground.comments.push(newComment);
                         foundCampground.save();
+                      //  console.log(newComment)
                         res.redirect("/campgrounds/" + foundCampground._id)
                     } 
                 })

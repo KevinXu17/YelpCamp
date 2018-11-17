@@ -16,11 +16,11 @@
     
     var methodOverride = require("method-override")
     
-    
     app.use(bodyParser.urlencoded({extended: true}));
     app.set("view engine", "ejs");
     
-    mongoose.connect(process.env.DATABASEURL);
+    var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v3"
+    mongoose.connect(url);
    
     
     app.use(express.static(__dirname + "/public"))

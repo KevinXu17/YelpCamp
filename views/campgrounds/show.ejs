@@ -2,21 +2,22 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <p class="lead">YelpCamp</p>
-            <div class="list-group">
-                <li class="list-group-iterm active">INFO1</li>
-                <li class="list-group-iterm">INFO2</li>
-                <li class="list-group-iterm">INFO3</li>
-            </div>
-        </div>
+        <!--<div class="col-md-3">-->
+        <!--    <p class="lead">YelpCamp</p>-->
+            <!--<div class="list-group">-->
+            <!--    <li class="list-group-iterm active">INFO1</li>-->
+            <!--    <li class="list-group-iterm">INFO2</li>-->
+            <!--    <li class="list-group-iterm">INFO3</li>-->
+            <!--</div>-->
+        <!--    <a href="/campgrounds" class="btn btn-primary btn-lg">Go Back</a>-->
+        <!--</div>-->
         <div class="col-md-9">
             <div class="thumbnail">
                 <img class="img-responsive" src= "<%= campground.image %>">
                 <div class="caption-full">
                     <h4 class="pull-right">$<%= campground.price %>/night</h4>
                     <h4>
-                        <a><%=campground.name%></a>
+                        <%=campground.name%>
                     </h4>
                     <p><%= campground.description %></p>
                     <p><em>Submitted By: <%= campground.author.username %></em></p>
@@ -29,15 +30,19 @@
                 </div>
             </div>
             <div class="well">
-                <div class="text-right">
-                        <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
-                </div>
+               
+                <span id="comment_button">
+                        <a class="btn btn-info navbar-left" href="/campgrounds">BackToCampgrounds</a>
+                        <a class="btn btn-success navbar-right" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
+                </span>
                 <hr>
                    <% campground.comments.forEach(function(comment) { %>
                       <div class="row">
                         <div class="col-md-12">
                         <strong><%= comment.author.username %></strong>
-                        <span class="pull-right"> 10 days ago</span>
+                        <span class="pull-right"> 
+                           <%= comment.created.toDateString()%>
+                        </span>
                         <p><%= comment.text%></p>
                         <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
                          <a class="btn btn-xs btn-info" href="/campgrounds/<%= campground._id%>/comments/<%=comment._id%>/edit">
